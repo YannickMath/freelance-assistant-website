@@ -1,9 +1,26 @@
 import React from "react";
+import type { Metadata } from "next";
 
 import Titre from "../components/shared/titre";
 import Button from "../components/shared/button";
 import CardContainer from "../components/shared/cardContainer";
 import { getServices, getIntroductionItems, IntroductionItems, ServiceSection } from "../data/servicesData";
+
+const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME || "OMI GESTION";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description: `Découvrez nos services d'Office Manager : gestion administrative, gestion commerciale, gestion du personnel et pré-comptabilité. ${businessName} vous accompagne dans la gestion quotidienne de votre entreprise à Lyon.`,
+  keywords: [
+    "services office manager",
+    "gestion administrative Lyon",
+    "gestion commerciale",
+    "gestion du personnel",
+    "pré-comptabilité",
+    "secrétariat professionnel",
+    "assistante administrative",
+  ],
+};
 
 const Services = () => {
   const services = getServices();

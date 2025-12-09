@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
 import Banner from "./components/welcome/banner";
 import Cv from "./components/welcome/cv";
 import Pourquoi from "./components/welcome/pourquoi";
 import Prestations from "./components/welcome/prestations";
 import Image from "next/image";
+
+const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME || "OMI GESTION";
+const ownerName = process.env.NEXT_PUBLIC_OWNER_NAME || "Cécile BOIRON";
+
+export const metadata: Metadata = {
+  title: `Accueil - ${businessName}`,
+  description: `${ownerName}, Office Manager indépendant à Lyon. Gestion administrative, commerciale, du personnel et pré-comptabilité. Solutions professionnelles sur mesure pour votre entreprise.`,
+  keywords: [
+    "office manager Lyon",
+    "assistante administrative Lyon",
+    "gestion administrative",
+    "office manager indépendant",
+    ownerName,
+    "secrétariat entreprise",
+  ],
+};
 
 export default function Home() {
   return (

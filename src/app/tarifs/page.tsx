@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
 import { MdOutlineAvTimer } from "react-icons/md";
 import Button from "../components/shared/button";
 import { PiPackageFill } from "react-icons/pi";
 import CardContainer from "../components/shared/cardContainer";
-import Image from "next/image"; // Import the Image component from the correct package
+import Image from "next/image";
+
+const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME || "OMI GESTION";
+const ownerName = process.env.NEXT_PUBLIC_OWNER_NAME || "Cécile BOIRON";
+
+export const metadata: Metadata = {
+  title: "Tarifs",
+  description: `Tarifs Office Manager à Lyon : 31€ nets/heure ou pack mission sur mesure. ${ownerName} propose des solutions flexibles adaptées à vos besoins en gestion administrative et commerciale. Devis personnalisé gratuit.`,
+  keywords: [
+    "tarif office manager",
+    "prix office manager Lyon",
+    "devis office manager",
+    "tarif assistante administrative",
+    "coût secrétariat",
+    ownerName,
+  ],
+};
 
 const Tarifs = () => {
   const arrayBuilderOffers = [

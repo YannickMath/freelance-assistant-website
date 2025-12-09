@@ -1,61 +1,71 @@
-"use client";
-
-import React, { useState } from "react";
-
+import type { Metadata } from "next";
 import "./globals.css";
-import Footer from "./components/footer/footer";
-import HeaderMenu from "./components/headerMenu/headerMenu";
-import Conditions from "./conditions/page";
-import StickyContact from "./components/shared/stickyContact";
+import LayoutClient from "./components/layout/layoutClient";
 
-// Note: metadata export cannot be used in client components
-// Metadata should be moved to a separate layout file or root layout
+const businessName = process.env.NEXT_PUBLIC_BUSINESS_NAME || "Office Manager";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cecileboiron.com";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${businessName} - Office Manager Indépendant Lyon`,
+    template: `%s | ${businessName}`,
+  },
+  description:
+    "Office Manager indépendant à Lyon. Services professionnels de gestion administrative, commerciale, du personnel et pré-comptabilité pour entreprises et professionnels.",
+  keywords: [
+    "office manager",
+    "office manager Lyon",
+    "assistante indépendante",
+    "gestion administrative",
+    "secrétariat Lyon",
+    "gestion commerciale",
+    "ressources humaines",
+    "pré-comptabilité",
+    "assistant administratif",
+  ],
+  authors: [{ name: process.env.NEXT_PUBLIC_OWNER_NAME || "Cécile BOIRON" }],
+  creator: businessName,
+  publisher: businessName,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: "/LOGO_CB_Noire.png" },
+    ],
+    apple: [
+      { url: "/LOGO_CB_Noire.png" },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isCgpsOpen, setIsCgpsOpen] = useState(false);
-
-  const handleToggleCgps = () => {
-    setIsCgpsOpen(!isCgpsOpen);
-  };
-
   return (
-    <>
-      <html lang="fr" className="h-full w-full">
-        <head>
-          <title>{process.env.NEXT_PUBLIC_BUSINESS_NAME || "Office Manager"} - Office Manager Indépendant</title>
-          <meta name="description" content={`${process.env.NEXT_PUBLIC_BUSINESS_NAME || "Office Manager"} propose des services d'office manager pour les entreprises : gestion administrative, commerciale, du personnel et pré-comptabilité. Services professionnels sur mesure.`} />
-          <meta name="keywords" content="office manager, gestion administrative, assistante indépendante, secrétariat, gestion commerciale, ressources humaines" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta property="og:title" content={`${process.env.NEXT_PUBLIC_BUSINESS_NAME || "Office Manager"} - Office Manager Indépendant`} />
-          <meta property="og:description" content="Services d'office manager professionnels : gestion administrative, commerciale, du personnel et pré-comptabilité." />
-          <meta property="og:type" content="website" />
-          <meta property="og:locale" content="fr_FR" />
-        </head>
-        <body className="h-full w-full">
-          {/* blur effect */}
-          <div
-            className={`relative flex flex-col justify-between h-full w-full ${
-              isCgpsOpen ? "blur-sm" : ""
-            }`}
-          >
-            <div className="phone:h-32 h-24 w-full top-0 z-10 fixed flex items-center header">
-              <HeaderMenu />
-            </div>
-            <main className="flex-grow phone:mt-32 mt-24">{children}</main>
-            <Footer isCgpsOpen={isCgpsOpen} onToggleCgps={handleToggleCgps} />
-          </div>
-          {isCgpsOpen && (
-            <div className="fixed inset-0 z-50">
-              <Conditions onClose={handleToggleCgps} />
-            </div>
-          )}
-          <StickyContact />
-        </body>
-      </html>
-    </>
+    <html lang="fr" className="h-full w-full">
+      <body className="h-full w-full">
+        <LayoutClient>{children}</LayoutClient>
+      </body>
+    </html>
   );
 }
