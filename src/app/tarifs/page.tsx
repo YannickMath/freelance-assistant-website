@@ -27,7 +27,7 @@ const Tarifs = () => {
       id: 1,
       title: "Tarif horaire",
       icon: <MdOutlineAvTimer className="w-8 h-8" />,
-      description: "31€ nets / heure",
+      description: "33€ nets / heure",
       note: "TVA non applicable art 293 B du CGI",
       button: <Button url="/contacts" label="Contactez moi" />,
     },
